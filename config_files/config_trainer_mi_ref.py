@@ -1,5 +1,3 @@
-import sys
-sys.path.insert(1, '/Users/apple/Desktop/Me/ENSTA/PFE/EEG_ECoG_decoder/pycnbi')
 
 import pycnbi
 #from pycnbi.pycnbi_config import CAP
