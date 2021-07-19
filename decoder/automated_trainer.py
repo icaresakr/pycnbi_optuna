@@ -79,11 +79,47 @@ if __name__ == '__main__':
         cfg_file = sys.argv[1]
     
     cfg = imp.load_source(cfg_file, cfg_file)
-    study = optuna.create_study(directions=["maximize", "maximize"])
+    sampler = optuna.samplers.NSGAIISampler()
+    study = optuna.create_study(directions=["maximize", "maximize"], sampler = sampler)
     study.optimize(objective, n_trials=1000)
+
+    # Get a list of the best trials.
+    print("Number of finished trials: ", len(study.trials))
+
+    print("Pareto front:")
+
+    trials = sorted(study.best_trials, key=lambda t: t.values)
+    textfile = open("best_trials.txt", "w")
+    str_text = ""
+    for trial in trials:
+        str_text+="  Trial#{}\n".format(trial.number)
+        str_text+="    Values: FLOPS={}, accuracy={}\n".format(trial.values[0], trial.values[1])
+        str_text+="    Params: {}\n".format(trial.params)
+        str_text+=" ------------------------------------------ \n"
+        print("  Trial#{}".format(trial.number))
+        print("    Values: FLOPS={}, accuracy={}".format(trial.values[0], trial.values[1]))
+        print("    Params: {}".format(trial.params))
+    textfile.write(str_text)
+    textfile.close()
+
+
+    fig0 = optuna.visualization.plot_optimization_history(study,target=lambda t: t.values[0])
+    fig0.show()
+
+    fig0_1 = optuna.visualization.plot_optimization_history(study,target=lambda t: t.values[1])
+    fig0_1.show()
 
     fig = optuna.visualization.plot_pareto_front(study, target_names=["accuracy", "f1 score"])
     fig.show()
+
+    fig1 = optuna.visualization.plot_contour(study, params=["LEPOCH", "HEPOCH"], target=lambda t: t.values[0])
+    fig1.show()
+
+    fig1_2 = optuna.visualization.plot_contour(study, params=["TP_FMIN", "TP_FMAX"], target=lambda t: t.values[0])
+    fig1_2.show()
+
+    fig1_3 = optuna.visualization.plot_contour(study, params=["NBTREESRF", "DEPTHRF"], target=lambda t: t.values[0])
+    fig1_3.show()
 
     fig2 = optuna.visualization.plot_param_importances(study, target=lambda t: t.values[0])
     fig2.show()
