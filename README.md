@@ -14,7 +14,7 @@ pip install optuna plotly
 4) Place the reference configuration file [config_trainer_mi_ref.py](https://github.com/icaresakr/pycnbi_optuna/blob/main/config_files/config_trainer_mi_ref.py) in the config_files folder of pycnbi.
 
 ## Run the automated trainer
-1) ### The optimizer configuration file [optimization_config.py](https://github.com/icaresakr/pycnbi_optuna/blob/main/decoder/optimization_config.py)
+### 1) The optimizer configuration file [optimization_config.py](https://github.com/icaresakr/pycnbi_optuna/blob/main/decoder/optimization_config.py)
 Define the parameters to optimize as a python dictionary, containing the name of the parameter, the type (float, int or categorical), the possible values to take, and the step (optional) between consecutive values (for int and float types only).
 ```python 
 PARAM_float = {
@@ -37,21 +37,26 @@ PARAM_categorical = {
 
 }
 ```
-2) ### The pycnbi reference configuration file [config_trainer_mi_ref.py](https://github.com/icaresakr/pycnbi_optuna/blob/main/config_files/config_trainer_mi_ref.py).
+### 2) The pycnbi reference configuration file [config_trainer_mi_ref.py](https://github.com/icaresakr/pycnbi_optuna/blob/main/config_files/config_trainer_mi_ref.py).
 For the parameters you want to explore (as specified in the optimizer configuration file), put a reference word instead of the value in config_trainer_mi_ref.py, so that the automated trainer can detect the word and replace it with the value to evaluate it.
 The reference word starts with an "r_" followed by the parameter name as specified in the optimizer configuration file. For example, if you call the epoch lower bound parameter "LEPOCH" in the optimizer configuration file, then the reference should be "r_LEPOCH" in the reference configuration file.
 For parameters you wish to fix, assign default value (remove the refernce if exists).
 
-3) ### Run the automated trainer:
-a) #Sequential execution
+### 3) Run the automated trainer:
+###### 3.a) Sequential execution
+To run the optimizer sequentially (no parallalization), run the following command in a terminal:
 ```bash
 python /path/to/automated_trainer.py /path/to/optimization_config.py
 ```
 
-b) #Parallel execution
+###### 3.b) Parallel execution
+To parallalize the execution, open N terminals (N is the number of processes you want) and run the above command in each terminal.
+NB: > make sure the number of trials in the automated_trained.py file is set in this case to the wanted number divided by the number of processes you chose. 
+      Ex: if we want 2000 trials, 5 processes (thus 5 terminals), the number of trial in automated_trained.py should be set to 600. 
+    > Also make sure the N_JOBS (number of jobs in feature computation / training / cv) you set in config_trainer_mi_ref.py is not too high (relatively to N, the         computer's number of cores, cache size, ...), to avoid performance retrograde.
 
 
 
-4) ### Do something else and get optimal decoding results once the execution is done
+### 4) Do something else and get optimal decoding results once the execution is done
 
 
