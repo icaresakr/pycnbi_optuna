@@ -43,19 +43,20 @@ The reference word starts with an "r_" followed by the parameter name as specifi
 For parameters you wish to fix, assign default value (remove the refernce if exists).
 
 ### 3) Run the automated trainer:
-###### 3.a) Sequential execution
+#### 3.a) Sequential execution
 To run the optimizer sequentially (no parallalization), run the following command in a terminal:
 ```bash
 python /path/to/automated_trainer.py /path/to/optimization_config.py
 ```
 
-###### 3.b) Parallel execution
+#### 3.b) Parallel execution
 To parallalize the execution, open N terminals (N is the number of processes you want) and run the above command in each terminal.<br/>
 NB:<br/>
-_ make sure the number of trials in the automated_trained.py file is set in this case to the wanted number divided by the number of processes you chose.<br/>
-      Ex: if we want 2000 trials, 5 processes (thus 5 terminals), the number of trial in automated_trained.py should be set to 600.<br/>
-_ Also make sure the N_JOBS (number of jobs in feature computation / training / cv) you set in config_trainer_mi_ref.py is not too high (relatively to N, the         computer's number of cores, cache size, ...), to avoid performance retrograde.
-
+<pre>
+    - make sure the number of trials in the automated_trained.py file is set in this case to the wanted number divided by the number of processes you chose.<br/>
+       Ex: if we want 2000 trials, 5 processes (thus 5 terminals), the number of trial in automated_trained.py should be set to 600.<br/>
+    - Also make sure the N_JOBS (number of jobs in feature computation / training / cv) you set in config_trainer_mi_ref.py is not too high (relatively to N, the         computer's number of cores, cache size, ...), to avoid performance retrograde.
+<pre>
 
 
 ### 4) Do something else and get optimal decoding results once the execution is done
