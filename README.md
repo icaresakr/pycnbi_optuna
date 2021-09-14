@@ -42,11 +42,16 @@ For the parameters you want to explore (as specified in the optimizer configurat
 The reference word starts with an "r_" followed by the parameter name as specified in the optimizer configuration file. For example, if you call the epoch lower bound parameter "LEPOCH" in the optimizer configuration file, then the reference should be "r_LEPOCH" in the reference configuration file.
 For parameters you wish to fix, assign default value (remove the refernce if exists).
 
-3) ### Run the automated trainer as follow:
+3) ### Run the automated trainer:
+a) #Sequential execution
 ```bash
 python /path/to/automated_trainer.py /path/to/optimization_config.py
 ```
 
-4) ### Do something else and get great decoding results once the execution is done
+b) #Parallel execution
+
+
+
+4) ### Do something else and get optimal decoding results once the execution is done
 
 
