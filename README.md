@@ -9,7 +9,7 @@ pip install optuna plotly
 ```
 2) Install [pycnbi](https://github.com/aizmeng/pycnbi) if you didn't.
 
-3) Replace the trainer.py default file with the trainer.py file provided in this repo, and add all other files from the [/decoder](https://github.com/icaresakr/pycnbi_optuna/tree/main/decoder) folder of this repo in the pycnbi decoder folder.
+3) Add all the files from the [/decoder](https://github.com/icaresakr/pycnbi_optuna/tree/main/decoder) folder of this repo in the pycnbi decoder folder (/YOUR/PATH/TO/pycnbi/pycnbi/decoder/).
 
 4) Place the reference configuration file [config_trainer_mi_ref.py](https://github.com/icaresakr/pycnbi_optuna/blob/main/config_files/config_trainer_mi_ref.py) in the config_files folder of pycnbi.
 
